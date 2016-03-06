@@ -17,15 +17,15 @@ const (
 )
 
 // Counter is a counter that keeps track of its recent values over a given
-// period of time, and with a given resolution. Use newCounter() to instantiate.
+// period of time, and with a given resolution. Use NewCounter() to instantiate.
 type Counter struct {
 	mu         sync.RWMutex
 	ts         [3]*timeseries
 	lastUpdate time.Time
 }
 
-// newCounter returns a new Counter.
-func newCounter() *Counter {
+// NewCounter returns a new Counter.
+func NewCounter() *Counter {
 	now := TimeNow()
 	c := &Counter{}
 	c.ts[hour] = newTimeSeries(now, time.Hour, time.Minute)

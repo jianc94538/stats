@@ -118,15 +118,15 @@ func NewHistogram(opts HistogramOptions) *Histogram {
 	h := Histogram{
 		opts:    opts,
 		buckets: make([]bucketInternal, opts.NumBuckets),
-		count:   newCounter(),
-		sum:     newCounter(),
+		count:   NewCounter(),
+		sum:     NewCounter(),
 		tracker: newTracker(),
 	}
 	low := opts.MinValue
 	delta := opts.SmallestBucketSize
 	for i := 0; i < opts.NumBuckets; i++ {
 		h.buckets[i].lowBound = low
-		h.buckets[i].count = newCounter()
+		h.buckets[i].count = NewCounter()
 		low = low + int64(delta)
 		delta = delta * (1.0 + opts.GrowthFactor)
 	}
